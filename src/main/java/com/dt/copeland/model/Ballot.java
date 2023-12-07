@@ -13,13 +13,17 @@ public class Ballot {
     private Long idNo;
 
     @Column(nullable = false)
+    private String voterUserName;
+
+    @Column(nullable = false)
     private Long electionIdNo;
 
     @ElementCollection
     private List<Integer> selectedCandidates;
 
-    public Ballot(Long idNo, Long electionIdNo, List<Integer> selectedCandidates) {
+    public Ballot(Long idNo, String voterUserName, Long electionIdNo, List<Integer> selectedCandidates) {
         this.idNo = idNo;
+        this.voterUserName = voterUserName;
         this.electionIdNo = electionIdNo;
         this.selectedCandidates = selectedCandidates;
     }
@@ -33,6 +37,14 @@ public class Ballot {
 
     public void setIdNo(Long idNo) {
         this.idNo = idNo;
+    }
+
+    public String getVoterUserName() {
+        return voterUserName;
+    }
+
+    public void setVoterUserName(String voterName) {
+        this.voterUserName = voterName;
     }
 
     public Long getElectionIdNo() {
