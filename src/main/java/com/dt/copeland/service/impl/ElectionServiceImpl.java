@@ -56,6 +56,10 @@ public class ElectionServiceImpl implements ElectionService {
 
         List<Ballot> ballots = ballotService.readAllVotesForElection(idNo);
 
+        if(ballots.isEmpty()) {
+            return "NO_VOTES";
+        }
+
         double[] candidatesScore = new double[electionSession.getCandidateCount()];
         for (int i = 0; i < electionSession.getCandidateCount(); i++) {
             for (int j = i + 1; j < electionSession.getCandidateCount(); j++) {

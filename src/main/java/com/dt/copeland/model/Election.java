@@ -11,6 +11,7 @@ public class Election {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNo;
+    private String moderator;
     private String title;
     private String category;
     private String status;
@@ -36,6 +37,14 @@ public class Election {
 
     public void setIdNo(Long idNo) {
         this.idNo = idNo;
+    }
+
+    public String getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(String moderator) {
+        this.moderator = moderator;
     }
 
     public String getTitle() {

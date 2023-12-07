@@ -4,14 +4,16 @@ import java.util.List;
 
 public class ElectionDTO {
     private Long idNo;
+    private String moderator;
     private String title;
     private String category;
     private String status;
     private int candidateCount;
     private List<String> candidates;
 
-    public ElectionDTO(Long idNo, String title, String category, String status, int candidateCount, List<String> candidates) {
+    public ElectionDTO(Long idNo, String moderator, String title, String category, String status, int candidateCount, List<String> candidates) {
         this.idNo = idNo;
+        this.moderator = moderator;
         this.title = title;
         this.category = category;
         this.status = status;
@@ -28,6 +30,14 @@ public class ElectionDTO {
 
     public void setIdNo(Long idNo) {
         this.idNo = idNo;
+    }
+
+    public String getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(String moderator) {
+        this.moderator = moderator;
     }
 
     public String getTitle() {
