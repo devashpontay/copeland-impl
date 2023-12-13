@@ -10,6 +10,8 @@ public interface ElectionService {
 
     ElectionDTO readOne(Long idNo);
 
+    List<ElectionDTO> readAllElections(String moderator);
+
     List<BallotDTO> readAllVotes(Long idNo);
 
     String getWinner(Long idNo);

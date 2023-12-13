@@ -43,6 +43,12 @@ public class ElectionServiceImpl implements ElectionService {
     }
 
     @Override
+    public List<ElectionDTO> readAllElections(String moderator) {
+        List<Election> elections = electionRepository.findAllByModerator(moderator);
+        return elections.stream().map(election -> modelMapper.map(election, ElectionDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public List<BallotDTO> readAllVotes(Long idNo) {
         List<Ballot> ballots = ballotService.readAllVotesForElection(idNo);
         return ballots.stream().map(ballot -> modelMapper.map(ballot, BallotDTO.class)).collect(Collectors.toList());

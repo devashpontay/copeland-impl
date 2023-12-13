@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(ElectionController.PATH)
 public class ElectionController {
@@ -18,6 +19,13 @@ public class ElectionController {
 
     public ElectionController(ElectionService electionService) {
         this.electionService = electionService;
+    }
+
+
+    @GetMapping("/query")
+    public ResponseEntity<List<ElectionDTO>> getAllElectionsByModerator(@RequestParam String moderator) {
+        System.out.println(moderator);
+        return ResponseEntity.ok(electionService.readAllElections(moderator));
     }
 
     @PostMapping
