@@ -43,8 +43,14 @@ public class ElectionServiceImpl implements ElectionService {
     }
 
     @Override
-    public List<ElectionDTO> readAllElections(String moderator) {
+    public List<ElectionDTO> readAllElectionsByModerator(String moderator) {
         List<Election> elections = electionRepository.findAllByModerator(moderator);
+        return elections.stream().map(election -> modelMapper.map(election, ElectionDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ElectionDTO> readAllElectionsFromAllUsers() {
+        List<Election> elections = electionRepository.findAll();
         return elections.stream().map(election -> modelMapper.map(election, ElectionDTO.class)).collect(Collectors.toList());
     }
 
@@ -96,5 +102,34 @@ public class ElectionServiceImpl implements ElectionService {
         }
 
         return electionSession.getCandidates().get(index);
+    }
+
+    @Override
+    public BallotDTO isDoneVoting(Long idNo, String user) {
+        List<Ballot> ballots = ballotService.readAllVotesForElection(idNo);
+
+
+        for(Ballot ballot : ballots) {
+            if(ballot.getVoterUserName().equals(user)) {
+                return modelMapper.map(ballot, BallotDTO.class);
+            }
+        }
+
+        throw new ResourceNotFoundException("Ballot not found dude.");
+    }
+
+    @Override
+    public ElectionDTO markAsClosed(Long idNo) {
+        Election election = electionRepository
+                .findById(idNo)
+                .orElseThrow(() -> new ResourceNotFoundException("Election not found bro"));
+        election.setStatus("CLOSED");
+        return modelMapper.map(electionRepository.save(election), ElectionDTO.class);
+    }
+
+    @Override
+    public Integer votesCountForElection(Long idNo) {
+        List<Ballot> ballots = ballotService.readAllVotesForElection(idNo);
+        return ballots.size();
     }
 }

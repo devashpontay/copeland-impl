@@ -24,8 +24,12 @@ public class ElectionController {
 
     @GetMapping("/query")
     public ResponseEntity<List<ElectionDTO>> getAllElectionsByModerator(@RequestParam String moderator) {
-        System.out.println(moderator);
-        return ResponseEntity.ok(electionService.readAllElections(moderator));
+        return ResponseEntity.ok(electionService.readAllElectionsByModerator(moderator));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ElectionDTO>> getAllElectionsFromAllUser() {
+        return ResponseEntity.ok(electionService.readAllElectionsFromAllUsers());
     }
 
     @PostMapping
@@ -49,4 +53,21 @@ public class ElectionController {
     public ResponseEntity<String> getWinner(@PathVariable Long idNo) {
         return ResponseEntity.ok(electionService.getWinner(idNo));
     }
+
+    @GetMapping("/{idNo}/votes/{user}")
+    public ResponseEntity<BallotDTO> isDoneVoting(@PathVariable Long idNo, @PathVariable String user) {
+        return ResponseEntity.ok(electionService.isDoneVoting(idNo, user));
+    }
+
+    @PatchMapping("/{idNo}/close")
+    public ResponseEntity<ElectionDTO> markAsClosed(@PathVariable Long idNo){
+        return ResponseEntity.ok(electionService.markAsClosed(idNo));
+    }
+
+    @GetMapping("/{idNo}/votes/count")
+    public ResponseEntity<Integer> getVotersCountForElection(@PathVariable Long idNo) {
+        return ResponseEntity.ok(electionService.votesCountForElection(idNo));
+    }
+
+
 }
