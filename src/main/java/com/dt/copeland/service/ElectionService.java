@@ -24,5 +24,6 @@ public interface ElectionService {
 
     Integer votesCountForElection(Long idNo);
 
+    void delete(Long idNo);
 
 }

@@ -15,20 +15,21 @@ public class Ballot {
     @Column(nullable = false)
     private String voterUserName;
 
-    @Column(nullable = false)
-    private Long electionIdNo;
+    @ManyToOne
+    @JoinColumn(name = "election_id_no", nullable = false)
+    private Election election;
 
     @ElementCollection
     private List<Integer> selectedCandidates;
 
-    public Ballot(Long idNo, String voterUserName, Long electionIdNo, List<Integer> selectedCandidates) {
-        this.idNo = idNo;
-        this.voterUserName = voterUserName;
-        this.electionIdNo = electionIdNo;
-        this.selectedCandidates = selectedCandidates;
+    public Ballot() {
     }
 
-    public Ballot() {
+    public Ballot(Long idNo, String voterUserName, Election election, List<Integer> selectedCandidates) {
+        this.idNo = idNo;
+        this.voterUserName = voterUserName;
+        this.election = election;
+        this.selectedCandidates = selectedCandidates;
     }
 
     public Long getIdNo() {
@@ -43,16 +44,16 @@ public class Ballot {
         return voterUserName;
     }
 
-    public void setVoterUserName(String voterName) {
-        this.voterUserName = voterName;
+    public void setVoterUserName(String voterUserName) {
+        this.voterUserName = voterUserName;
     }
 
-    public Long getElectionIdNo() {
-        return electionIdNo;
+    public Election getElection() {
+        return election;
     }
 
-    public void setElectionIdNo(Long electionIdNo) {
-        this.electionIdNo = electionIdNo;
+    public void setElection(Election election) {
+        this.election = election;
     }
 
     public List<Integer> getSelectedCandidates() {
