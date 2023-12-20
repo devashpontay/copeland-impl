@@ -28,7 +28,11 @@ public class BallotServiceImpl implements BallotService {
 
     @Override
     public BallotDTO create(BallotDTO ballotDTO) {
+        Election election = electionRepository
+                .findById(ballotDTO.getElectionIdNo())
+                .orElseThrow(() -> new ResourceNotFoundException("No such election found."));
         Ballot ballotObj = modelMapper.map(ballotDTO, Ballot.class);
+        ballotObj.setElection(election);
         Ballot savedBallotObj = ballotRepository.save(ballotObj);
         return modelMapper.map(savedBallotObj, BallotDTO.class);
     }

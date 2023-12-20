@@ -69,5 +69,11 @@ public class ElectionController {
         return ResponseEntity.ok(electionService.votesCountForElection(idNo));
     }
 
+    @DeleteMapping("/{idNo}")
+    public ResponseEntity<String> deleteElection(@PathVariable Long idNo) {
+        electionService.delete(idNo);
+        return ResponseEntity.ok("DELETED");
+    }
+
 
 }
