@@ -9,4 +9,6 @@ public interface BallotService {
     BallotDTO create(BallotDTO ballotDTO);
 
     List<Ballot> readAllVotesForElection(Long idNo);
+
+    BallotDTO readUserVoteForElection(Long idNo, String user);
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ElectionRepository extends JpaRepository<Election, Long> {
     List<Election> findAllByModerator(String moderator);
+
 }

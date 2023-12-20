@@ -23,4 +23,5 @@ public class BallotController {
         BallotDTO savedBallotDTO = ballotService.create(ballotDTO);
         return new ResponseEntity<>(savedBallotDTO, HttpStatus.CREATED);
     }
+
 }
