@@ -9,6 +9,7 @@ public class BallotDTO {
     private Long electionIdNo;
     private List<String> selectedCandidates;
 
+
     public BallotDTO(Long idNo, String voterUserName, Long electionIdNo, List<String> selectedCandidates) {
         this.idNo = idNo;
         this.voterUserName = voterUserName;

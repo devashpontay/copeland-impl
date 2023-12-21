@@ -132,4 +132,12 @@ public class ElectionServiceImpl implements ElectionService {
         List<Ballot> ballots = ballotService.readAllVotesForElection(idNo);
         return ballots.size();
     }
+
+    @Override
+    public void delete(Long idNo) {
+        electionRepository
+                .findById(idNo)
+                .orElseThrow(() -> new ResourceNotFoundException("Election not found"));
+        electionRepository.deleteById(idNo);
+    }
 }

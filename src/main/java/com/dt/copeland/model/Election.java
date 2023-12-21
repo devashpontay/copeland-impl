@@ -19,16 +19,21 @@ public class Election {
     @ElementCollection
     private List<String> candidates;
 
-    public Election(Long idNo, String title, String category, String status, int candidateCount, List<String> candidates) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "election")
+    private List<Ballot> ballots;
+
+    public Election() {
+    }
+
+    public Election(Long idNo, String moderator, String title, String category, String status, int candidateCount, List<String> candidates, List<Ballot> ballots) {
         this.idNo = idNo;
+        this.moderator = moderator;
         this.title = title;
         this.category = category;
         this.status = status;
         this.candidateCount = candidateCount;
         this.candidates = candidates;
-    }
-
-    public Election() {
+        this.ballots = ballots;
     }
 
     public Long getIdNo() {
@@ -85,5 +90,13 @@ public class Election {
 
     public void setCandidates(List<String> candidates) {
         this.candidates = candidates;
+    }
+
+    public List<Ballot> getBallots() {
+        return ballots;
+    }
+
+    public void setBallots(List<Ballot> ballots) {
+        this.ballots = ballots;
     }
 }
