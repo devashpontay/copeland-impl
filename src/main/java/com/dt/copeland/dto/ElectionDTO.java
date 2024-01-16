@@ -1,5 +1,6 @@
 package com.dt.copeland.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class ElectionDTO {
@@ -11,7 +12,9 @@ public class ElectionDTO {
     private int candidateCount;
     private List<String> candidates;
 
-    public ElectionDTO(Long idNo, String moderator, String title, String category, String status, int candidateCount, List<String> candidates) {
+    private String entryDate;
+
+    public ElectionDTO(Long idNo, String moderator, String title, String category, String status, int candidateCount, List<String> candidates, String entryDate) {
         this.idNo = idNo;
         this.moderator = moderator;
         this.title = title;
@@ -19,6 +22,7 @@ public class ElectionDTO {
         this.status = status;
         this.candidateCount = candidateCount;
         this.candidates = candidates;
+        this.entryDate = entryDate;
     }
 
     public ElectionDTO() {
@@ -78,5 +82,13 @@ public class ElectionDTO {
 
     public void setCandidates(List<String> candidates) {
         this.candidates = candidates;
+    }
+
+    public String getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(String entryDate) {
+        this.entryDate = entryDate;
     }
 }

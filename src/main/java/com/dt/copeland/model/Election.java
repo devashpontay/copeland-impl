@@ -1,6 +1,8 @@
 package com.dt.copeland.model;
 
 import jakarta.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,10 +24,12 @@ public class Election {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "election")
     private List<Ballot> ballots;
 
+    private Date entryDate;
+
     public Election() {
     }
 
-    public Election(Long idNo, String moderator, String title, String category, String status, int candidateCount, List<String> candidates, List<Ballot> ballots) {
+    public Election(Long idNo, String moderator, String title, String category, String status, int candidateCount, List<String> candidates, List<Ballot> ballots, Date entryDate) {
         this.idNo = idNo;
         this.moderator = moderator;
         this.title = title;
@@ -34,6 +38,7 @@ public class Election {
         this.candidateCount = candidateCount;
         this.candidates = candidates;
         this.ballots = ballots;
+        this.entryDate = entryDate;
     }
 
     public Long getIdNo() {
@@ -98,5 +103,13 @@ public class Election {
 
     public void setBallots(List<Ballot> ballots) {
         this.ballots = ballots;
+    }
+
+    public Date getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
     }
 }
